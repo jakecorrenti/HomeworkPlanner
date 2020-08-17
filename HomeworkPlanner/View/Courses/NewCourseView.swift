@@ -20,6 +20,7 @@ struct NewCourseView: View {
     @State private var errorMessage = ""
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var moc
     
     private var viewModel = NewCourseViewModel()
     
@@ -64,7 +65,7 @@ struct NewCourseView: View {
             .navigationBarItems(trailing:
                 Button(
                     action: {
-                        self.viewModel.verifyContents(name: self.name, professor: self.professor, location: self.location, frequency: self.frequency, startTime: self.startTime, endTime: self.endTime) { (result) in
+                        self.viewModel.saveCourse(context: self.moc, name: self.name, professor: self.professor, location: self.location, frequency: self.frequency, startTime: self.startTime, endTime: self.endTime) { (result) in
                             switch result {
                             case .failure(let error):
                                 self.errorMessage = error.rawValue

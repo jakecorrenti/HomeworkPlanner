@@ -13,7 +13,7 @@
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
         <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="frequency" attributeType="Transformable"/>
+        <attribute name="frequency" attributeType="Transformable" customClassName="[Int]"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="location" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
@@ -23,7 +23,7 @@
         <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="course" inverseEntity="Assignment"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-63" positionY="-18" width="128" height="178"/>
         <element name="Assignment" positionX="255.47265625" positionY="-17.0546875" width="128" height="178"/>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>

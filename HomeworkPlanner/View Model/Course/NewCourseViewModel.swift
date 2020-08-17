@@ -7,24 +7,25 @@
 //
 
 import Foundation
+import CoreData
 
 struct NewCourseViewModel {
     
-    func verifyContents(name: String, professor: String, location: String, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {
+    private func verifyContents(name: String, professor: String, location: String, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedProfessor = professor.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedLocation = location.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if trimmedName == "" {
-            handler(.failure(NewCourseValidationError.name))
+            handler(.failure(.name))
         } else if trimmedProfessor == "" {
-            handler(.failure(NewCourseValidationError.professor))
+            handler(.failure(.professor))
         } else if trimmedLocation == "" {
-            handler(.failure(NewCourseValidationError.location))
+            handler(.failure(.location))
         } else if frequency.count == 0 {
-            handler(.failure(NewCourseValidationError.frequency))
+            handler(.failure(.frequency))
         } else if !isTimeFrameValid(startTime: startTime, endTime: endTime) {
-            handler(.failure(NewCourseValidationError.timeFrame))
+            handler(.failure(.timeFrame))
         } else {
             handler(.success(Void()))
         }
@@ -32,6 +33,31 @@ struct NewCourseViewModel {
     
     private func isTimeFrameValid(startTime: Date, endTime: Date) -> Bool {
         return startTime < endTime
+    }
+    
+    func saveCourse(context: NSManagedObjectContext, name: String, professor: String, location: String, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {
+        verifyContents(name: name, professor: professor, location: location, frequency: frequency, startTime: startTime, endTime: endTime) { (result) in
+            switch result {
+            case .failure(let error):
+                handler(.failure(error))
+            case .success(_):
+                let course = Course(context: context)
+                course.id = UUID()
+                course.name = name
+                course.professor = professor
+                course.location = location
+                course.frequency = frequency
+                course.start = startTime
+                course.end = endTime
+                 
+                do {
+                    try context.save()
+                    handler(.success(Void()))
+                } catch {
+                    handler(.failure(.saveFailure))
+                }
+            }
+        }
     }
     
 }

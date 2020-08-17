@@ -9,12 +9,21 @@
 import SwiftUI
 
 struct CoursesView: View {
+    
+    @FetchRequest(entity: Course.entity(), sortDescriptors: []) var courses: FetchedResults<Course>
+    
     @State private var showNewCourse = false
     @Environment(\.managedObjectContext) var moc
     
+    init() {
+        UITableView.appearance().tableFooterView = UIView()
+    }
+    
     var body: some View {
         NavigationView {
-            Text("Hello World")
+            List(courses, id: \.id) { course in
+                CourseRow(course: course)
+            }
             .navigationBarTitle("Courses")
             .navigationBarItems(trailing:
                 Button(

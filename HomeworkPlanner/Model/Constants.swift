@@ -13,6 +13,10 @@ enum Images {
     static let book = "book"
     static let plus = "plus"
     static let checkmark = "checkmark"
+    static let person = "person"
+    static let clock = "clock"
+    static let map = "map"
+    static let folder = "folder"
 }
 
 enum CourseType: String, CaseIterable {
@@ -88,4 +92,5 @@ enum NewCourseValidationError: String, Error {
     case location = "Invalid location entered"
     case frequency = "The course must be attended at least one day a week"
     case timeFrame = "The course cannot end before the start time"
+    case saveFailure = "Unable to save your course"
 }
