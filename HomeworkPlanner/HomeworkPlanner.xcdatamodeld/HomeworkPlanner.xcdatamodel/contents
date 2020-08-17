@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Assignment" representedClassName="Assignment" syncable="YES" codeGenerationType="class">
+        <attribute name="details" attributeType="String"/>
+        <attribute name="dueDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="priority" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reminderTiming" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="assignments" inverseEntity="Course"/>
+    </entity>
+    <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
+        <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="frequency" attributeType="Transformable"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="location" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="professor" attributeType="String"/>
+        <attribute name="start" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="course" inverseEntity="Assignment"/>
+    </entity>
+    <elements>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="Assignment" positionX="255.47265625" positionY="-17.0546875" width="128" height="178"/>
+    </elements>
 </model>
