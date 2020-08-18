@@ -20,6 +20,7 @@ enum Images {
     static let threeExclamationPoints = "exclamationmark.3"
     static let calendar = "calendar"
     static let filledCircleCheckmark = "checkmark.circle.fill"
+    static let trash = "trash"
 }
 
 enum CourseType: String, CaseIterable {

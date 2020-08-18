@@ -14,6 +14,8 @@ struct CourseDetailView: View {
     
     var viewModel = CourseDetailViewModel()
     
+    @State private var showAllAssignments = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -30,7 +32,7 @@ struct CourseDetailView: View {
                 Spacer()
                     .frame(height: 36)
                 Button(action: {
-                    
+                    self.showAllAssignments.toggle()
                 }) {
                     HStack {
                         Spacer()
@@ -48,6 +50,13 @@ struct CourseDetailView: View {
             .padding(.horizontal)
         }
         .navigationBarTitle(course.name!)
+        .navigationBarItems(trailing: HStack(spacing: 16) {
+            Button(action: {}) { Text("Edit")}
+            Button(action: {}) { Image(systemName: Images.plus) }
+        })
+        .sheet(isPresented: $showAllAssignments, content: {
+            AllCourseAssignmentsView(assignments: self.viewModel.fetchAssignmentsFor(course: self.course, data: self.assignments))
+        })
     }
 }
 

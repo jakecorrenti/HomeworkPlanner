@@ -10,10 +10,11 @@ import SwiftUI
 
 struct CourseWorkGlanceView: View {
     var course: Course
-    
     let viewModel = CourseDetailViewModel()
     
     @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
+    @State private var showAllAssignments = false
+    @State private var assignmentsFilter = [Assignment]()
     
     var body: some View {
         HStack {
@@ -29,7 +30,8 @@ struct CourseWorkGlanceView: View {
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
                     .onTapGesture {
-                        #warning("take this to the AllCourseAssignmentsView with filtered results")
+                        self.assignmentsFilter = self.viewModel.fetchCriticalPriorityAssignmentsData(for: self.course, data: self.assignments)["assignments"]!
+                        self.showAllAssignments.toggle()
                 }
                 
                 HorizontalGlanceView(title: "Assignments due today", complete: viewModel.fetchAssignmentsDueTodayData(for: course, data: assignments)["complete"]!.count, incomplete: viewModel.fetchAssignmentsDueTodayData(for: course, data: assignments)["incomplete"]!.count, imageName: Images.calendar, color: .orange)
@@ -37,25 +39,32 @@ struct CourseWorkGlanceView: View {
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
                     .onTapGesture {
-                        #warning("take this to the AllCourseAssignmentsView with filtered results")
+                        self.assignmentsFilter = self.viewModel.fetchAssignmentsDueTodayData(for: self.course, data: self.assignments)["assignments"]!
+                        self.showAllAssignments.toggle()
                 }
                 
                 HStack {
                     GlanceCardView(title: "Done", completed: viewModel.fetchCompleteAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .green)
                         .onTapGesture {
-                            #warning("take this to the AllCourseAssignmentsView with filtered results")
+                            self.assignmentsFilter = self.viewModel.fetchCompleteAssignments(for: self.course, data: self.assignments)
+                            self.showAllAssignments.toggle()
                     }
-                    GlanceCardView(title: "Not done", completed: viewModel.fetchIncompleteAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .primary)
+                    GlanceCardView(title: "Not done", completed: viewModel.fetchIncompleteAssignments(for: self.course, data: self.assignments).count, total: course.assignments?.count ?? 0, color: .primary)
                         .onTapGesture {
-                            #warning("take this to the AllCourseAssignmentsView with filtered results")
+                            self.assignmentsFilter = self.viewModel.fetchIncompleteAssignments(for: self.course, data: self.assignments)
+                            self.showAllAssignments.toggle()
                     }
                     GlanceCardView(title: "Over due", completed: viewModel.fetchOverdueAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .red)
                         .onTapGesture {
-                            #warning("take this to the AllCourseAssignmentsView with filtered results")
+                            self.assignmentsFilter = self.viewModel.fetchOverdueAssignments(for: self.course, data: self.assignments)
+                            self.showAllAssignments.toggle()
                     }
                 }
             }
             Spacer()
+        }
+        .sheet(isPresented: $showAllAssignments) {
+            AllCourseAssignmentsView(assignments: self.assignmentsFilter)
         }
     }
 }

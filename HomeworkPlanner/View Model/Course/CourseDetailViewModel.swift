@@ -25,6 +25,10 @@ struct CourseDetailViewModel {
         return items
     }
     
+    func fetchAssignmentsFor(course: Course, data: FetchedResults<Assignment>) -> [Assignment] {
+        convertFetchedResultsToArray(data).filter { $0.course == course }
+    }
+    
     func fetchCompleteAssignments(for course: Course, data: FetchedResults<Assignment>) -> [Assignment] {
         let assignments = convertFetchedResultsToArray(data)
         var completedAssignments = [Assignment]()
