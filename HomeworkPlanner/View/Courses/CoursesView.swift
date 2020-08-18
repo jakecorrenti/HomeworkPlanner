@@ -22,7 +22,9 @@ struct CoursesView: View {
     var body: some View {
         NavigationView {
             List(courses, id: \.id) { course in
-                CourseRow(course: course)
+                NavigationLink(destination: CourseDetailView(course: course)) {
+                    CourseRow(course: course)
+                }
             }
             .navigationBarTitle("Courses")
             .navigationBarItems(trailing:

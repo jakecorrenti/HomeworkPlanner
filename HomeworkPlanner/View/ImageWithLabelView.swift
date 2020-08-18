@@ -11,19 +11,24 @@ import SwiftUI
 struct ImageWithLabelView: View {
     var image: Image
     var label: String
+    var hasSpacer: Bool = false 
+    var font: Font = .caption
     
     var body: some View {
         HStack {
             image
             Text(label)
                 .foregroundColor(.secondary)
+            if hasSpacer {
+                Spacer()
+            }
         }
-        .font(.caption)
+        .font(font)
     }
 }
 
 struct ImageWithLabelView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageWithLabelView(image: Image(systemName: Images.book), label: "Book")
+        ImageWithLabelView(image: Image(systemName: Images.book), label: "Book", hasSpacer: false)
     }
 }

@@ -17,6 +17,9 @@ enum Images {
     static let clock = "clock"
     static let map = "map"
     static let folder = "folder"
+    static let threeExclamationPoints = "exclamationmark.3"
+    static let calendar = "calendar"
+    static let filledCircleCheckmark = "checkmark.circle.fill"
 }
 
 enum CourseType: String, CaseIterable {
@@ -76,7 +79,7 @@ let priorityColors: [Color] = [
     .red
 ]
 
-let dayInitials = [
+let daysInitials = [
     "s",
     "m",
     "t",
