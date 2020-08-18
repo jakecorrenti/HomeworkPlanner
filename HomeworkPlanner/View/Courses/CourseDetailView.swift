@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CourseDetailView: View {
     var course: Course
+    @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
     
     var viewModel = CourseDetailViewModel()
     
@@ -42,6 +43,7 @@ struct CourseDetailView: View {
                 .frame(height: 44)
                 .background(Color.accentColor)
                 .cornerRadius(12)
+                .padding(.bottom)
             }
             .padding(.horizontal)
         }

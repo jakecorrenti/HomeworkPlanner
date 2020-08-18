@@ -9,9 +9,12 @@
 import SwiftUI
 
 struct CourseWorkGlanceView: View {
-    var course: Course 
+    var course: Course
     
-    #warning("The view model data implementation is not yet developed for this view.")
+    let viewModel = CourseDetailViewModel()
+    
+    @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
+    
     var body: some View {
         HStack {
             VStack {
@@ -21,7 +24,7 @@ struct CourseWorkGlanceView: View {
                     Spacer()
                 }
                 
-                HorizontalGlanceView(title: "Critical priority assignments", complete: 1, incomplete: 3, imageName: Images.person, color: .red)
+                HorizontalGlanceView(title: "Critical priority assignments", complete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["complete"]!.count, incomplete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["incomplete"]!.count, imageName: Images.person, color: .red)
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
@@ -29,7 +32,7 @@ struct CourseWorkGlanceView: View {
                         #warning("take this to the AllCourseAssignmentsView with filtered results")
                 }
                 
-                HorizontalGlanceView(title: "Assignments due today", complete: 1, incomplete: 3, imageName: Images.calendar, color: .orange)
+                HorizontalGlanceView(title: "Assignments due today", complete: viewModel.fetchAssignmentsDueTodayData(for: course, data: assignments)["complete"]!.count, incomplete: viewModel.fetchAssignmentsDueTodayData(for: course, data: assignments)["incomplete"]!.count, imageName: Images.calendar, color: .orange)
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
@@ -38,15 +41,15 @@ struct CourseWorkGlanceView: View {
                 }
                 
                 HStack {
-                    GlanceCardView(title: "Done", completed: 10, incomplete: 15, color: .green)
+                    GlanceCardView(title: "Done", completed: viewModel.fetchCompleteAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .green)
                         .onTapGesture {
                             #warning("take this to the AllCourseAssignmentsView with filtered results")
                     }
-                    GlanceCardView(title: "Not done", completed: 2, incomplete: 15, color: .primary)
+                    GlanceCardView(title: "Not done", completed: viewModel.fetchIncompleteAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .primary)
                         .onTapGesture {
                             #warning("take this to the AllCourseAssignmentsView with filtered results")
                     }
-                    GlanceCardView(title: "Over due", completed: 3, incomplete: 15, color: .red)
+                    GlanceCardView(title: "Over due", completed: viewModel.fetchOverdueAssignments(for: course, data: assignments).count, total: course.assignments?.count ?? 0, color: .red)
                         .onTapGesture {
                             #warning("take this to the AllCourseAssignmentsView with filtered results")
                     }
@@ -93,7 +96,7 @@ struct HorizontalGlanceView: View {
 struct GlanceCardView: View {
     var title: String
     var completed: Int
-    var incomplete: Int
+    var total: Int
     var color: Color
     
     var body: some View {
@@ -105,7 +108,7 @@ struct GlanceCardView: View {
                 Text("\(completed)")
                     .font(.title)
                     .bold()
-                Text("\(incomplete)")
+                Text("\(total)")
                     .fontWeight(.semibold)
                     .padding(.top, 8)
                     .padding(.bottom, 24)
