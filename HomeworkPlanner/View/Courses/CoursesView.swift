@@ -10,8 +10,9 @@ import SwiftUI
 
 struct CoursesView: View {
     
-    @FetchRequest(entity: Course.entity(), sortDescriptors: []) var courses: FetchedResults<Course>
+    private var viewModel = CoursesViewModel()
     
+    @FetchRequest(entity: Course.entity(), sortDescriptors: []) var courses: FetchedResults<Course>
     @State private var showNewCourse = false
     @Environment(\.managedObjectContext) var moc
     
@@ -21,10 +22,17 @@ struct CoursesView: View {
     
     var body: some View {
         NavigationView {
-            List(courses, id: \.id) { course in
-                NavigationLink(destination: CourseDetailView(course: course)) {
-                    CourseRow(course: course)
+            List {
+                ForEach(courses, id: \.id) { course in
+                    NavigationLink(destination: CourseDetailView(course: course)) {
+                        CourseRow(course: course)
+                    }
                 }
+                .onDelete(perform: delete)
+            }
+            .sheet(isPresented: $showNewCourse) {
+                NewCourseView()
+                    .environment(\.managedObjectContext, self.moc)
             }
             .navigationBarTitle("Courses")
             .navigationBarItems(trailing:
@@ -33,10 +41,12 @@ struct CoursesView: View {
                     label: { Image(systemName: Images.plus) }
                 )
             )
-                .sheet(isPresented: $showNewCourse) {
-                    NewCourseView()
-                        .environment(\.managedObjectContext, self.moc)
-            }
+        }
+    }
+    
+    func delete(offset: IndexSet) {
+        for index in offset {
+            viewModel.delete(course: courses[index], with: moc)
         }
     }
 }
