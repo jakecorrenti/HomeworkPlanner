@@ -27,7 +27,6 @@ struct CoursesView: View {
                 ForEach(courses, id: \.id) { course in
                     NavigationLink(destination: CourseDetailView(course: course)) {
                         CourseRow(course: course)
-//                        Text("HEY")
                     }
                 }
                 .onDelete(perform: delete)

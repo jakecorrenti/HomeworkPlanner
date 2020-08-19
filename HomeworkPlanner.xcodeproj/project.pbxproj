@@ -26,6 +26,7 @@
 		3E4C512324EB36C8002719EA /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C512224EB36C8002719EA /* CourseDetailView.swift */; };
 		3E738ABB24EDBE2A00658537 /* AssignmentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABA24EDBE2A00658537 /* AssignmentDetailView.swift */; };
 		3E738ABD24EDBE5600658537 /* AssignmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABC24EDBE5600658537 /* AssignmentsView.swift */; };
+		3E738ABF24EDCCC500658537 /* AssignmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABE24EDCCC500658537 /* AssignmentRow.swift */; };
 		3E74583424ECD0B4008F5F0F /* EditCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E74583324ECD0B4008F5F0F /* EditCourseView.swift */; };
 		3E95E4F624EC46C600B14AE9 /* AllCourseAssignmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95E4F524EC46C500B14AE9 /* AllCourseAssignmentsView.swift */; };
 		3E95E4F824EC60A200B14AE9 /* CoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E95E4F724EC60A200B14AE9 /* CoursesViewModel.swift */; };
@@ -59,6 +60,7 @@
 		3E4C512224EB36C8002719EA /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
 		3E738ABA24EDBE2A00658537 /* AssignmentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailView.swift; sourceTree = "<group>"; };
 		3E738ABC24EDBE5600658537 /* AssignmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsView.swift; sourceTree = "<group>"; };
+		3E738ABE24EDCCC500658537 /* AssignmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentRow.swift; sourceTree = "<group>"; };
 		3E74583324ECD0B4008F5F0F /* EditCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseView.swift; sourceTree = "<group>"; };
 		3E95E4F524EC46C500B14AE9 /* AllCourseAssignmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCourseAssignmentsView.swift; sourceTree = "<group>"; };
 		3E95E4F724EC60A200B14AE9 /* CoursesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewModel.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				3ED58DD324ECF1CA0044168A /* TextView.swift */,
 				3E738ABA24EDBE2A00658537 /* AssignmentDetailView.swift */,
 				3E738ABC24EDBE5600658537 /* AssignmentsView.swift */,
+				3E738ABE24EDCCC500658537 /* AssignmentRow.swift */,
 			);
 			path = Assignments;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				3E4C510E24EB10ED002719EA /* AppView.swift in Sources */,
 				3E4C50F624EAFFC2002719EA /* HomeworkPlanner.xcdatamodeld in Sources */,
 				3E74583424ECD0B4008F5F0F /* EditCourseView.swift in Sources */,
+				3E738ABF24EDCCC500658537 /* AssignmentRow.swift in Sources */,
 				3E738ABB24EDBE2A00658537 /* AssignmentDetailView.swift in Sources */,
 				3E4C511324EB114F002719EA /* Constants.swift in Sources */,
 				3E12505724ECEF2700907C27 /* NewAssignmentView.swift in Sources */,
