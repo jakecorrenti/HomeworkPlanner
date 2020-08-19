@@ -32,7 +32,7 @@ struct NewCourseViewModel {
     }
     
     private func isTimeFrameValid(startTime: Date, endTime: Date) -> Bool {
-        return startTime < endTime
+        startTime < endTime
     }
     
     func saveCourse(context: NSManagedObjectContext, name: String, professor: String, location: String, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {

@@ -9,12 +9,14 @@
 import SwiftUI
 
 struct CourseDetailView: View {
-    var course: Course
+    @ObservedObject var course: Course
     @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
+    @Environment(\.managedObjectContext) var moc 
     
     var viewModel = CourseDetailViewModel()
     
     @State private var showAllAssignments = false
+    @State private var showEditView = false
     
     var body: some View {
         ScrollView {
@@ -51,8 +53,11 @@ struct CourseDetailView: View {
         }
         .navigationBarTitle(course.name!)
         .navigationBarItems(trailing: HStack(spacing: 16) {
-            Button(action: {}) { Text("Edit")}
+            Button(action: { self.showEditView.toggle() }) { Text("Edit")}
             Button(action: {}) { Image(systemName: Images.plus) }
+                .sheet(isPresented: $showEditView, content: {
+                    EditCourseView(course: self.course)
+                })
         })
         .sheet(isPresented: $showAllAssignments, content: {
             AllCourseAssignmentsView(assignments: self.viewModel.fetchAssignmentsFor(course: self.course, data: self.assignments))
