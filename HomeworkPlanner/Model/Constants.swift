@@ -21,6 +21,7 @@ enum Images {
     static let calendar = "calendar"
     static let filledCircleCheckmark = "checkmark.circle.fill"
     static let trash = "trash"
+    static let filledFlag = "flag.fill"
 }
 
 enum CourseType: String, CaseIterable {
@@ -45,6 +46,7 @@ enum AssignmentType: String, CaseIterable {
     case lab = "Lab"
     case assignment = "Assignment"
     case test = "Test"
+    case quiz = "Quiz"
     case midterm = "Midterm"
     case final = "Final"
     case presentation = "Presentation"

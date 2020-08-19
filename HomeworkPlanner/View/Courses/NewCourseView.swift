@@ -24,6 +24,10 @@ struct NewCourseView: View {
     
     private var viewModel = NewCourseViewModel()
     
+    init() {
+        UITableView.appearance().keyboardDismissMode = .onDrag
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -35,7 +39,7 @@ struct NewCourseView: View {
                 
                 Section {
                     Picker(selection: $type, label: Text("Type")) {
-                        ForEach(0..<CourseType.allCases.count) { index in
+                        ForEach(0..<CourseType.allCases.count, id: \.self) { index in
                             Text(CourseType.allCases[index].rawValue)
                         }
                     }
