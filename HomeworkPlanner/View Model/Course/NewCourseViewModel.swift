@@ -35,7 +35,7 @@ struct NewCourseViewModel {
         startTime < endTime
     }
     
-    func saveCourse(context: NSManagedObjectContext, name: String, professor: String, location: String, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {
+    func saveCourse(context: NSManagedObjectContext, name: String, professor: String, location: String, type: Int, frequency: [Int], startTime: Date, endTime: Date, handler: @escaping (Result<Void, NewCourseValidationError>) -> Void) {
         verifyContents(name: name, professor: professor, location: location, frequency: frequency, startTime: startTime, endTime: endTime) { (result) in
             switch result {
             case .failure(let error):
@@ -46,6 +46,7 @@ struct NewCourseViewModel {
                 course.name = name
                 course.professor = professor
                 course.location = location
+                course.type = Int16(type)
                 course.frequency = frequency
                 course.start = startTime
                 course.end = endTime
