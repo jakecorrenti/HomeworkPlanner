@@ -14,18 +14,42 @@ struct CourseRow: View {
     private let viewModel = CourseRowViewModel()
     
     var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 4)
-                .frame(width: 8)
-                .foregroundColor(course.type == 0 ? .purple : course.type == 1 ? .green : .blue)
-            VStack(alignment: .leading) {
-                Text(course.name ?? "Course name")
-                    .font(Font(UIFont.preferredFont(forTextStyle: .title2)))
-                    .fontWeight(.semibold)
-                ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Course professor")
-                ImageWithLabelView(image: Image(systemName: Images.clock), label: "\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60))) \(course.frequency?.count == 2) \(course.frequency?.count == 1 ? "day" : "days") a week")
-                ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Course location")
-                ImageWithLabelView(image: Image(systemName: Images.folder), label: CourseType.allCases[Int(course.type)].rawValue)
+        VStack(alignment: .leading) {
+            HStack {
+                Text(course.name ?? "Unknown course")
+                    .font(Font(UIFont.preferredFont(forTextStyle: .headline)))
+                Spacer()
+                    .frame(width: 16)
+                Text(CourseType.allCases[Int(course.type)].rawValue)
+                    .bold()
+                    .font(.caption)
+                    .padding(2)
+                    .background(course.type == 0 ? Color.purple.opacity(0.2) : course.type == 1 ? Color.green.opacity(0.2) : Color.blue.opacity(0.2))
+                    .foregroundColor(course.type == 0 ? .purple : course.type == 1 ? .green : .blue)
+                    .cornerRadius(4)
+            }
+            ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Unknown professor", font: .caption)
+            ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Unknown location", font: .caption)
+            ImageWithLabelView(image: Image(systemName: Images.clock), label: "\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)))", font: .caption)
+            
+            HStack {
+                Spacer()
+                FrequencySquares(frequency: course.frequency ?? [Int]())
+                Spacer()
+            }
+        }
+    }
+}
+
+struct FrequencySquares: View {
+    var frequency: [Int]
+    
+    var body: some View {
+        HStack(spacing: 24) {
+            ForEach(0..<7) { index in
+                RoundedRectangle(cornerRadius: 8)
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(self.frequency.contains(index) ? .accentColor : Color(UIColor.secondarySystemBackground))
             }
         }
     }

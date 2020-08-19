@@ -22,6 +22,7 @@ enum Images {
     static let filledCircleCheckmark = "checkmark.circle.fill"
     static let trash = "trash"
     static let filledFlag = "flag.fill"
+    static let clipboard = "doc.on.clipboard"
 }
 
 enum CourseType: String, CaseIterable {
