@@ -61,7 +61,7 @@ struct CourseDetailView: View {
                 })
             Button(action: { self.showNewAssignment.toggle() }) { Image(systemName: Images.plus) }
                 .sheet(isPresented: $showNewAssignment, content: {
-                    NewAssignmentView()
+                    NewAssignmentView(course: self.course)
                         .environment(\.managedObjectContext, self.moc)
                 })
         })

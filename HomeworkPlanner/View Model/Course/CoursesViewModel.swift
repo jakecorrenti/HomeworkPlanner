@@ -14,6 +14,8 @@ struct CoursesViewModel {
     func delete(course: Course, with context: NSManagedObjectContext) {
         context.delete(course)
         
+        #warning("Delete all of the course's assignments")
+        
         do {
             try context.save()
         } catch {
