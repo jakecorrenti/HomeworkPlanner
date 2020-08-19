@@ -46,7 +46,7 @@ struct NewAssignmentViewModel {
                 let updatedAssignments = course.assignments?.adding(assignment)
                 course.assignments = updatedAssignments as NSSet?
                 
-                if assignment.type > 0 {
+                if assignment.reminderTiming > 0 {
                     self.createReminder(assignment: assignment) { (error) in
                         if let _ = error {
                             completion(error)

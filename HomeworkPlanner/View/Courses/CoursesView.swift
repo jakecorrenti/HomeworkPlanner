@@ -13,6 +13,7 @@ struct CoursesView: View {
     private var viewModel = CoursesViewModel()
     
     @FetchRequest(entity: Course.entity(), sortDescriptors: []) var courses: FetchedResults<Course>
+    @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
     @State private var showNewCourse = false
     @Environment(\.managedObjectContext) var moc
     
@@ -41,6 +42,16 @@ struct CoursesView: View {
                     label: { Image(systemName: Images.plus) }
                 )
             )
+        }.onAppear {
+            print(self.assignments)
+            print()
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notifs) in
+                notifs.forEach { print($0.identifier) }
+                print()
+                notifs.forEach { print($0.content) }
+                print()
+                print(notifs.count)
+            }
         }
     }
     
