@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CourseRow: View {
-    var course: Course
+    @ObservedObject var course: Course
     
     private let viewModel = CourseRowViewModel()
     

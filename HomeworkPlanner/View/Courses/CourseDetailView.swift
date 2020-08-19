@@ -16,7 +16,7 @@ struct CourseDetailView: View {
     var viewModel = CourseDetailViewModel()
     
     @State private var showAllAssignments = false
-    @State private var showEdit = false
+    @State private var showEditView = false
     
     var body: some View {
         ScrollView {
@@ -53,12 +53,11 @@ struct CourseDetailView: View {
         }
         .navigationBarTitle(course.name!)
         .navigationBarItems(trailing: HStack(spacing: 16) {
-            Button(action: { self.showEdit.toggle() }) { Text("Edit")}
-                .sheet(isPresented: $showEdit, content: {
-                    EditCourseView(course: self.course)
-                        .environment(\.managedObjectContext, self.moc)
-                })
+            Button(action: { self.showEditView.toggle() }) { Text("Edit")}
             Button(action: {}) { Image(systemName: Images.plus) }
+                .sheet(isPresented: $showEditView, content: {
+                    EditCourseView(course: self.course)
+                })
         })
         .sheet(isPresented: $showAllAssignments, content: {
             AllCourseAssignmentsView(assignments: self.viewModel.fetchAssignmentsFor(course: self.course, data: self.assignments))
