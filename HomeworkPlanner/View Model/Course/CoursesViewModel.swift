@@ -12,6 +12,11 @@ import CoreData
 struct CoursesViewModel {
     
     func delete(course: Course, with context: NSManagedObjectContext) {
+        
+        for assignment in course.assignments ?? NSSet() {
+            deletePendingNotifications(for: assignment as! Assignment)
+        }
+        
         context.delete(course)
         
         do {
@@ -19,6 +24,10 @@ struct CoursesViewModel {
         } catch {
             print("🔴 ERROR: \(error.localizedDescription)")
         }
+    }
+    
+    private func deletePendingNotifications(for assignment: Assignment) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [assignment.id?.uuidString ?? UUID().uuidString])
     }
     
 }

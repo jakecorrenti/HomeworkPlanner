@@ -21,6 +21,7 @@ enum Images {
     static let calendar = "calendar"
     static let filledCircleCheckmark = "checkmark.circle.fill"
     static let trash = "trash"
+    static let filledFlag = "flag.fill"
 }
 
 enum CourseType: String, CaseIterable {
@@ -45,6 +46,7 @@ enum AssignmentType: String, CaseIterable {
     case lab = "Lab"
     case assignment = "Assignment"
     case test = "Test"
+    case quiz = "Quiz"
     case midterm = "Midterm"
     case final = "Final"
     case presentation = "Presentation"
@@ -52,7 +54,7 @@ enum AssignmentType: String, CaseIterable {
 
 enum AssignmentReminderTiming: String, CaseIterable {
     case none = "None"
-    case current = "At time of event"
+    case current = "At time due"
     case five = "5 minutes before"
     case ten = "10 minutes before"
     case fifteen = "15 minutes before"
@@ -97,4 +99,12 @@ enum NewCourseValidationError: String, Error {
     case frequency = "The course must be attended at least one day a week"
     case timeFrame = "The course cannot end before the start time"
     case saveFailure = "Unable to save your course"
+}
+
+enum NewAssignmentValidationError: String, Error {
+    case name = "Invalid name entered"
+    case details = "Invalid assignment description entered"
+    case date = "Cannot enter a due date that has already passed"
+    case reminder = "Cannot enter a reminder time that has already passed"
+    case creatingReminder = "Error creating your reminder"
 }

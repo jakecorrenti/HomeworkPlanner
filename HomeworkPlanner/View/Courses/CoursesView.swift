@@ -13,6 +13,7 @@ struct CoursesView: View {
     private var viewModel = CoursesViewModel()
     
     @FetchRequest(entity: Course.entity(), sortDescriptors: []) var courses: FetchedResults<Course>
+    @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
     @State private var showNewCourse = false
     @Environment(\.managedObjectContext) var moc
     

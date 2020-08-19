@@ -17,17 +17,18 @@ struct CourseDetailView: View {
     
     @State private var showAllAssignments = false
     @State private var showEditView = false
+    @State private var showNewAssignment = false
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor!, hasSpacer: true, font: .body)
-                ImageWithLabelView(image: Image(systemName: Images.clock), label: viewModel.convertTimeFrame(start: course.start!, end: course.end!), hasSpacer: true, font: .body)
-                ImageWithLabelView(image: Image(systemName: Images.map), label: course.location!, hasSpacer: true, font: .body)
+                ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Course professor", hasSpacer: true, font: .body)
+                ImageWithLabelView(image: Image(systemName: Images.clock), label: viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)), hasSpacer: true, font: .body)
+                ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Course location", hasSpacer: true, font: .body)
                 ImageWithLabelView(image: Image(systemName: Images.folder), label: CourseType.allCases[Int(course.type)].rawValue, hasSpacer: true, font: .body)
                 Spacer()
                     .frame(height: 24)
-                CourseDetailFrequencyView(frequency: course.frequency!)
+                CourseDetailFrequencyView(frequency: course.frequency ?? [0])
                 Spacer()
                     .frame(height: 24)
                 CourseWorkGlanceView(course: course)
@@ -51,12 +52,17 @@ struct CourseDetailView: View {
             }
             .padding(.horizontal)
         }
-        .navigationBarTitle(course.name!)
+        .navigationBarTitle(course.name ?? "Course name")
         .navigationBarItems(trailing: HStack(spacing: 16) {
             Button(action: { self.showEditView.toggle() }) { Text("Edit")}
-            Button(action: {}) { Image(systemName: Images.plus) }
                 .sheet(isPresented: $showEditView, content: {
                     EditCourseView(course: self.course)
+                        .environment(\.managedObjectContext, self.moc)
+                })
+            Button(action: { self.showNewAssignment.toggle() }) { Image(systemName: Images.plus) }
+                .sheet(isPresented: $showNewAssignment, content: {
+                    NewAssignmentView(course: self.course)
+                        .environment(\.managedObjectContext, self.moc)
                 })
         })
         .sheet(isPresented: $showAllAssignments, content: {
