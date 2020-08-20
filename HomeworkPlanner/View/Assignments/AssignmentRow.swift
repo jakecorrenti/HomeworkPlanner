@@ -24,6 +24,7 @@ struct AssignmentRow: View {
             }) {
                 Image(systemName: self.assignment.isComplete ? Images.checkboxFilled : Images.square)
                     .foregroundColor(self.assignment.isComplete ? .green : .primary)
+                    .font(.headline)
             }.buttonStyle(BorderlessButtonStyle())
             VStack(alignment: .leading) {
                 HStack {
@@ -37,6 +38,29 @@ struct AssignmentRow: View {
                         .font(.headline)
                         .lineLimit(1)
                 }
+                
+                Text(self.assignment.details ?? "Unknown details")
+                    .lineLimit(1)
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
+                HStack {
+                    ImageWithLabelView(image: Image(systemName: Images.clock), label: self.viewModel.convertDateFormat(date: self.assignment.dueDate ?? Date()), font: .subheadline)
+                    Spacer()
+                    HStack {
+                        Text(AssignmentReminderTiming.allCases[Int(self.assignment.reminderTiming)].rawValue)
+                            .foregroundColor(.secondary)
+                         
+                        if self.assignment.reminderTiming > 0 {
+                            Image(systemName: Images.bell)
+                                .foregroundColor(self.viewModel.hasAlreadyBeenNotified(assignment: self.assignment) ? .green : .primary)
+                        } else {
+                            Image(systemName: Images.bellSlashed)
+                        }
+                            
+                    }
+                    .font(.subheadline)
+                }
+                
                 HStack {
                     Text(AssignmentType.allCases[Int(self.assignment.type)].rawValue)
                         .bold()
@@ -55,17 +79,7 @@ struct AssignmentRow: View {
                             .cornerRadius(4)
                     }
                 }
-                .padding(.top, 2)
-                .padding(.bottom, 8)
-                Text(self.assignment.details ?? "Unknown details")
-                    .lineLimit(1)
-                    .foregroundColor(.secondary)
-                    .font(.subheadline)
-                HStack {
-                    ImageWithLabelView(image: Image(systemName: Images.clock), label: self.viewModel.convertDateFormat(date: self.assignment.dueDate ?? Date()), font: .subheadline)
-                    Spacer()
-                    ImageWithLabelView(image: self.assignment.reminderTiming > 0 ? Image(systemName: Images.bell) : Image(systemName: Images.bellSlashed) , label: AssignmentReminderTiming.allCases[Int(self.assignment.reminderTiming)].rawValue, font: .subheadline)
-                }
+                .padding(.top, 8)
             }
         }
     }
