@@ -24,7 +24,7 @@ enum Images {
     static let filledFlag = "flag.fill"
     static let clipboard = "doc.on.clipboard"
     static let checkboxFilled = "checkmark.square.fill"
-    static let checkbox = "checkmark.square"
+    static let square = "square"
     static let bell = "bell"
     static let bellSlashed = "bell.slash"
 }

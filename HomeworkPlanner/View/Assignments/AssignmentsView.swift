@@ -16,7 +16,7 @@ struct AssignmentsView: View {
             List {
                 ForEach(assignments, id: \.id) { assignment in
                     NavigationLink(destination: AssignmentDetailView()) {
-                        Text(assignment.name ?? "Assignment name")
+                        AssignmentRow(assignment: assignment)
                     }
                 }
             }
