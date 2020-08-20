@@ -24,6 +24,7 @@
 		3E4C511F24EB30CA002719EA /* ImageWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C511E24EB30CA002719EA /* ImageWithLabelView.swift */; };
 		3E4C512124EB3243002719EA /* CourseRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C512024EB3243002719EA /* CourseRowViewModel.swift */; };
 		3E4C512324EB36C8002719EA /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C512224EB36C8002719EA /* CourseDetailView.swift */; };
+		3E5BB2EF24EEE54E0051C21C /* AssignmentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB2EE24EEE54E0051C21C /* AssignmentDetailViewModel.swift */; };
 		3E738ABB24EDBE2A00658537 /* AssignmentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABA24EDBE2A00658537 /* AssignmentDetailView.swift */; };
 		3E738ABD24EDBE5600658537 /* AssignmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABC24EDBE5600658537 /* AssignmentsView.swift */; };
 		3E738ABF24EDCCC500658537 /* AssignmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E738ABE24EDCCC500658537 /* AssignmentRow.swift */; };
@@ -59,6 +60,7 @@
 		3E4C511E24EB30CA002719EA /* ImageWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithLabelView.swift; sourceTree = "<group>"; };
 		3E4C512024EB3243002719EA /* CourseRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRowViewModel.swift; sourceTree = "<group>"; };
 		3E4C512224EB36C8002719EA /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
+		3E5BB2EE24EEE54E0051C21C /* AssignmentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewModel.swift; sourceTree = "<group>"; };
 		3E738ABA24EDBE2A00658537 /* AssignmentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailView.swift; sourceTree = "<group>"; };
 		3E738ABC24EDBE5600658537 /* AssignmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsView.swift; sourceTree = "<group>"; };
 		3E738ABE24EDCCC500658537 /* AssignmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentRow.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				3ED58DD624ECF8F50044168A /* NewAssignmentViewModel.swift */,
 				3E738AC024EE232400658537 /* AssignmentRowViewModel.swift */,
+				3E5BB2EE24EEE54E0051C21C /* AssignmentDetailViewModel.swift */,
 			);
 			path = Assignment;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				3E738ABB24EDBE2A00658537 /* AssignmentDetailView.swift in Sources */,
 				3E4C511324EB114F002719EA /* Constants.swift in Sources */,
 				3E12505724ECEF2700907C27 /* NewAssignmentView.swift in Sources */,
+				3E5BB2EF24EEE54E0051C21C /* AssignmentDetailViewModel.swift in Sources */,
 				3E4C511D24EB2D39002719EA /* CourseRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ struct AssignmentsView: View {
                 ForEach(assignments, id: \.id) { assignment in
                     ZStack {
                         AssignmentRow(assignment: assignment)
-                        NavigationLink(destination: AssignmentDetailView()) {
+                        NavigationLink(destination: AssignmentDetailView(assignment: assignment)) {
                             EmptyView()
                         }
                         .foregroundColor(.clear)
