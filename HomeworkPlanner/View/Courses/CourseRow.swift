@@ -17,7 +17,8 @@ struct CourseRow: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(course.name ?? "Unknown course")
-                    .font(Font(UIFont.preferredFont(forTextStyle: .headline)))
+                    .font(.headline)
+                    .bold()
                 Spacer()
                     .frame(width: 16)
                 Text(CourseType.allCases[Int(course.type)].rawValue)
@@ -28,9 +29,9 @@ struct CourseRow: View {
                     .foregroundColor(course.type == 0 ? .purple : course.type == 1 ? .green : .blue)
                     .cornerRadius(4)
             }
-            ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Unknown professor", font: .caption)
-            ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Unknown location", font: .caption)
-            ImageWithLabelView(image: Image(systemName: Images.clock), label: "\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)))", font: .caption)
+            ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Unknown professor", font: .subheadline)
+            ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Unknown location", font: .subheadline)
+            ImageWithLabelView(image: Image(systemName: Images.clock), label: "\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)))", font: .subheadline)
             
             HStack {
                 Spacer()
