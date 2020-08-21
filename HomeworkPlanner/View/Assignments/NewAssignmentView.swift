@@ -61,7 +61,7 @@ struct NewAssignmentView: View {
                         Text("Due date")
                     }
                     
-                    Picker(selection: $reminderTiming, label: Text("Reminder timing")) {
+                    Picker(selection: $reminderTiming, label: Text("Reminder")) {
                         ForEach(0..<AssignmentReminderTiming.allCases.count, id: \.self) { index in
                             Text(AssignmentReminderTiming.allCases[index].rawValue)
                         }

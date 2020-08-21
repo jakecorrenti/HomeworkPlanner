@@ -12,6 +12,7 @@ struct AssignmentDetailView: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var assignment: Assignment
     @State private var showCourseDetail = false
+    @State private var showEdit = false
     
     let viewModel = AssignmentDetailViewModel()
     
@@ -36,7 +37,7 @@ struct AssignmentDetailView: View {
             }
             .padding(.horizontal)
             
-            ImageWithLabelView(image: Image(systemName: Images.clock), label: "9:00 AM", hasSpacer: true, font: .subheadline)
+            ImageWithLabelView(image: Image(systemName: Images.clock), label: self.viewModel.convertDate(assignment: self.assignment), hasSpacer: true, font: .subheadline)
                 .padding([.horizontal, .top])
             HStack {
                 if self.assignment.reminderTiming > 0 {
@@ -94,6 +95,16 @@ struct AssignmentDetailView: View {
             }
         })
         .navigationBarTitle(self.assignment.name ?? "Unkown assignment")
+            .navigationBarItems(trailing: Button(action: {
+                self.showEdit.toggle()
+            }, label: {
+                Text("Edit")
+            })
+                .sheet(isPresented: $showEdit, content: {
+                    EditAssignmentView(assignment: self.assignment)
+                        .environment(\.managedObjectContext, self.moc)
+                })
+        )
     }
 }
 

@@ -17,6 +17,7 @@ struct AssignmentsView: View {
                 ForEach(assignments, id: \.id) { assignment in
                     ZStack {
                         AssignmentRow(assignment: assignment)
+                            .padding(.vertical, 4)
                         NavigationLink(destination: AssignmentDetailView(assignment: assignment)) {
                             EmptyView()
                         }
