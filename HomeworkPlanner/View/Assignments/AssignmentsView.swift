@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AssignmentsView: View {
     @FetchRequest(entity: Assignment.entity(), sortDescriptors: []) var assignments: FetchedResults<Assignment>
+    @Environment(\.managedObjectContext) var moc
+    
+    let viewModel = AssignmentsViewModel()
     
     var body: some View {
         NavigationView {
@@ -25,8 +28,15 @@ struct AssignmentsView: View {
                         .frame(width: 0)
                     }
                 }
+                .onDelete(perform: delete)
             }
             .navigationBarTitle("Assignments")
+        }
+    }
+    
+    func delete(indexSet: IndexSet) {
+        for index in indexSet {
+            self.viewModel.deleteAssignment(assignment: self.assignments[index], context: self.moc)
         }
     }
 }
