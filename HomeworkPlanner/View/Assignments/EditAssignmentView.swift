@@ -18,6 +18,9 @@ struct EditAssignmentView: View {
     @State private var updatedPriority: Int
     @State private var updatedReminderTiming: Int
     
+    @State private var errorMessage = ""
+    @State private var showAlert = false
+    
     let viewModel = EditAssignmentViewModel()
     @State private var initialDate: Date
     
@@ -82,9 +85,9 @@ struct EditAssignmentView: View {
                 Button(
                     action: {
                         self.viewModel.save(assignment: self.assignment, initialDueDate: self.initialDate, updatedType: self.updatedType, updatedPriority: self.updatedPriority, updatedReminderTiming: self.updatedReminderTiming, context: self.moc) { (error) in
-                            if let error = error { 
-                                #warning("Implement alert")
-                                print("ERROR: \(error.rawValue)")
+                            if let error = error {
+                                self.errorMessage = error.rawValue
+                                self.showAlert.toggle()
                             } else {
                                 self.presentationMode.wrappedValue.dismiss()
                             }
@@ -92,6 +95,9 @@ struct EditAssignmentView: View {
                 },
                     label: { Text("Save") }
                 )
+                    .alert(isPresented: $showAlert, content: {
+                        Alert(title: Text("Oh no! 🥴"), message: Text(self.errorMessage), dismissButton: .default(Text("Ok")))
+                    })
             )
         }
     }
