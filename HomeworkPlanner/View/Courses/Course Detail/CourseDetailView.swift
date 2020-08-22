@@ -18,6 +18,7 @@ struct CourseDetailView: View {
     @State private var showAllAssignments = false
     @State private var showEditView = false
     @State private var showNewAssignment = false
+    @State private var state: CourseWorkAtAGlanceState = .all
     
     var body: some View {
         ScrollView {
@@ -66,7 +67,8 @@ struct CourseDetailView: View {
                 })
         })
         .sheet(isPresented: $showAllAssignments, content: {
-            AllCourseAssignmentsView(assignments: self.viewModel.fetchAssignmentsFor(course: self.course, data: self.assignments))
+            AllCourseAssignmentsView(course: self.course, state: self.state)
+                .environment(\.managedObjectContext, self.moc)
         })
     }
 }

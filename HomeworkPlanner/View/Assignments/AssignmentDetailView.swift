@@ -94,7 +94,7 @@ struct AssignmentDetailView: View {
                     .environment(\.managedObjectContext, self.moc)
             }
         })
-        .navigationBarTitle(self.assignment.name ?? "Unkown assignment")
+            .navigationBarTitle(Text(self.assignment.name ?? "Unkown assignment"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 self.showEdit.toggle()
             }, label: {
