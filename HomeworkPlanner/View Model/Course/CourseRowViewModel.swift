@@ -15,4 +15,17 @@ struct CourseRowViewModel {
         
         return "\(formatter.string(from: start)) - \(formatter.string(from: end))"
     }
+    
+    func getFrequencyInitials(course: Course) -> String {
+        var string = ""
+        
+        for (i, day) in (course.frequency ?? [Int]()).enumerated() {
+            string.append(daysInitials[day].uppercased())
+            if i < (course.frequency ?? [Int]()).count - 1 {
+                string.append(", ")
+            }
+        }
+        
+        return string
+    }
 }

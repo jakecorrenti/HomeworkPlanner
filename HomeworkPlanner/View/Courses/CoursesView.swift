@@ -25,8 +25,14 @@ struct CoursesView: View {
         NavigationView {
             List {
                 ForEach(courses, id: \.id) { course in
-                    NavigationLink(destination: CourseDetailView(course: course)) {
+                    ZStack {
                         CourseRow(course: course)
+                            .padding(.vertical, 4)
+                        NavigationLink(destination: CourseDetailView(course: course)) {
+                            EmptyView()
+                        }
+                        .foregroundColor(.clear)
+                        .frame(width: 0)
                     }
                 }
                 .onDelete(perform: delete)
