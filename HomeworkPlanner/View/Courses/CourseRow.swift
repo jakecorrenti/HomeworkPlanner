@@ -15,12 +15,10 @@ struct CourseRow: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(course.name ?? "Unknown course")
                     .font(.headline)
                     .bold()
-                Spacer()
-                    .frame(width: 16)
                 Text(CourseType.allCases[Int(course.type)].rawValue)
                     .bold()
                     .font(.caption)
@@ -29,28 +27,27 @@ struct CourseRow: View {
                     .foregroundColor(course.type == 0 ? .purple : course.type == 1 ? .green : .blue)
                     .cornerRadius(4)
             }
-            ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Unknown professor", font: .subheadline)
-            ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Unknown location", font: .subheadline)
-            ImageWithLabelView(image: Image(systemName: Images.clock), label: "\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)))", font: .subheadline)
             
             HStack {
+                ImageWithLabelView(image: Image(systemName: Images.person), label: course.professor ?? "Unknown professor", font: .subheadline)
                 Spacer()
-                FrequencySquares(frequency: course.frequency ?? [Int]())
-                Spacer()
+                HStack {
+                    Text("\(viewModel.convertTimeFrame(start: course.start ?? Date(), end: course.end ?? Date().addingTimeInterval(60)))")
+                        .foregroundColor(.secondary)
+                    Image(systemName: Images.clock)
+                }
+                .font(.subheadline)
             }
-        }
-    }
-}
-
-struct FrequencySquares: View {
-    var frequency: [Int]
-    
-    var body: some View {
-        HStack(spacing: 24) {
-            ForEach(0..<7) { index in
-                RoundedRectangle(cornerRadius: 8)
-                    .frame(width: 25, height: 25)
-                    .foregroundColor(self.frequency.contains(index) ? .accentColor : Color(UIColor.secondarySystemBackground))
+            
+            HStack {
+                ImageWithLabelView(image: Image(systemName: Images.map), label: course.location ?? "Unknown location", font: .subheadline)
+                Spacer()
+                HStack {
+                    Text(self.viewModel.getFrequencyInitials(course: self.course))
+                        .foregroundColor(.secondary)
+                    Image(systemName: Images.calendar)
+                }
+                .font(.subheadline)
             }
         }
     }
