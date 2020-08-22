@@ -66,27 +66,23 @@ struct CourseDetailViewModel {
     /// Assignments key gives list of all assignments, complete key gives list of completed assignments, incomplete key gives list of incomplete assignments
     func fetchAssignmentsDueTodayData(for course: Course, data: FetchedResults<Assignment>) -> [String : [Assignment]] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "mm/dd/yyyy"
+        formatter.dateFormat = "M/dd/yyyy"
         
-        let assignments = convertFetchedResultsToArray(data)
-        var dueTodayAssignments = [Assignment]()
-        for assignment in assignments where formatter.string(from: assignment.dueDate!) == formatter.string(from: Date()) {
-            dueTodayAssignments.append(assignment)
-        }
-        
-        let completed = dueTodayAssignments.filter { $0.isComplete }
-        let incomplete = dueTodayAssignments.filter { !$0.isComplete }
+        let assignments = fetchAssignmentsFor(course: course, data: data)
+        let dueToday = assignments.filter { formatter.string(from: $0.dueDate ?? Date()) == formatter.string(from: Date())}
+        let complete = dueToday.filter { $0.isComplete }
+        let incomplete = dueToday.filter { !$0.isComplete }
         
         return [
-            "assignments" : dueTodayAssignments,
-            "complete" : completed,
+            "assignments" : dueToday,
+            "complete" : complete,
             "incomplete" : incomplete
         ]
     }
     
     /// Assignments key gives list of all assignments, complete key gives list of completed assignments, incomplete key gives list of incomplete assignments
     func fetchCriticalPriorityAssignmentsData(for course: Course, data: FetchedResults<Assignment>) -> [String : [Assignment]] {
-        let assignments = convertFetchedResultsToArray(data)
+        let assignments = fetchAssignmentsFor(course: course, data: data)
         let criticalPriority = assignments.filter { $0.priority == 4 }
         let completed = criticalPriority.filter { $0.isComplete }
         let incomplete = criticalPriority.filter { !$0.isComplete }
