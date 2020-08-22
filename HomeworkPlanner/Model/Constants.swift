@@ -113,3 +113,12 @@ enum NewAssignmentValidationError: String, Error {
     case reminder = "Cannot enter a reminder time that has already passed"
     case creatingReminder = "Error creating your reminder"
 }
+
+enum CourseWorkAtAGlanceState {
+    case all
+    case critical
+    case today
+    case done
+    case notDone
+    case overDue 
+}
