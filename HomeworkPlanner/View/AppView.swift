@@ -11,6 +11,12 @@ import SwiftUI
 struct AppView: View {
     var body: some View {
         TabView {
+            AssignmentsView()
+                .tabItem {
+                    Text("Assignments")
+                    Image(systemName: Images.clipboard)
+            }
+            
             CoursesView()
                 .tabItem {
                     Text("Courses")
