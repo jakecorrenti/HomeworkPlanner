@@ -27,6 +27,7 @@ enum Images {
     static let square = "square"
     static let bell = "bell"
     static let bellSlashed = "bell.slash"
+    static let horizontalSlider = "slider.horizontal.3"
 }
 
 enum CourseType: String, CaseIterable {
@@ -121,4 +122,10 @@ enum CourseWorkAtAGlanceState {
     case done
     case notDone
     case overDue 
+}
+
+enum AssignmentsFilter: String, CaseIterable {
+    case all = "All"
+    case incomplete = "Incomplete"
+    case complete = "Complete"
 }

@@ -14,23 +14,35 @@ struct AssignmentsView: View {
     
     let viewModel = AssignmentsViewModel()
     
+    @State private var assignmentsCompletionState = 0
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(assignments, id: \.id) { assignment in
-                    ZStack {
-                        AssignmentRow(assignment: assignment)
-                            .padding(.vertical, 4)
-                        NavigationLink(destination: AssignmentDetailView(assignment: assignment)) {
-                            EmptyView()
-                        }
-                        .foregroundColor(.clear)
-                        .frame(width: 0)
+            VStack {
+                Picker(selection: $assignmentsCompletionState, label: Text("Filter")) {
+                    ForEach(0..<AssignmentsFilter.allCases.count, id: \.self) { index in
+                        Text(AssignmentsFilter.allCases[index].rawValue)
                     }
                 }
-                .onDelete(perform: delete)
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+                List {
+                    ForEach(self.viewModel.filterAssignments(state: self.assignmentsCompletionState, data: self.assignments), id: \.id) { assignment in
+                        ZStack {
+                            AssignmentRow(assignment: assignment)
+                                .padding(.vertical, 4)
+                            NavigationLink(destination: AssignmentDetailView(assignment: assignment)) {
+                                EmptyView()
+                            }
+                            .foregroundColor(.clear)
+                            .frame(width: 0)
+                        }
+                    }
+                    .onDelete(perform: delete)
+                }
+                .navigationBarTitle("Assignments")
+                .navigationBarTitle("Assignments")
             }
-            .navigationBarTitle("Assignments")
         }
     }
     
