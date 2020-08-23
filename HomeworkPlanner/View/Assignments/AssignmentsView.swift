@@ -57,7 +57,7 @@ struct AssignmentsView: View {
     
     func delete(indexSet: IndexSet) {
         for index in indexSet {
-            self.viewModel.deleteAssignment(assignment: self.assignments[index], context: self.moc)
+            self.viewModel.deleteAssignment(assignment: self.viewModel.filterAssignments(state: self.assignmentsCompletionState, data: self.assignments)[index], context: self.moc)
         }
     }
 }
