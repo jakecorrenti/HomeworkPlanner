@@ -15,6 +15,7 @@ struct AssignmentsView: View {
     let viewModel = AssignmentsViewModel()
     
     @State private var assignmentsCompletionState = 0
+    @State private var showNewAssignment = false
     
     var body: some View {
         NavigationView {
@@ -40,8 +41,16 @@ struct AssignmentsView: View {
                     }
                     .onDelete(perform: delete)
                 }
+                .sheet(isPresented: $showNewAssignment, content: {
+                    NewAssignmentViewSpecifyingCourse()
+                        .environment(\.managedObjectContext, self.moc)
+                })
                 .navigationBarTitle("Assignments")
-                .navigationBarTitle("Assignments")
+                .navigationBarItems(trailing: Button(action: {
+                    self.showNewAssignment.toggle()
+                }, label: {
+                    Image(systemName: Images.plus)
+                }))
             }
         }
     }
