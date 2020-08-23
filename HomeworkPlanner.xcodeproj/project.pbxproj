@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E12505724ECEF2700907C27 /* NewAssignmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E12505624ECEF2700907C27 /* NewAssignmentView.swift */; };
+		3E14B00224F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14B00124F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift */; };
 		3E4C50F124EAFFC2002719EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C50F024EAFFC2002719EA /* AppDelegate.swift */; };
 		3E4C50F324EAFFC2002719EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C50F224EAFFC2002719EA /* SceneDelegate.swift */; };
 		3E4C50F624EAFFC2002719EA /* HomeworkPlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C50F424EAFFC2002719EA /* HomeworkPlanner.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		3E12505624ECEF2700907C27 /* NewAssignmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAssignmentView.swift; sourceTree = "<group>"; };
+		3E14B00124F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAssignmentViewSpecifyingCourse.swift; sourceTree = "<group>"; };
 		3E4C50ED24EAFFC2002719EA /* HomeworkPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeworkPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4C50F024EAFFC2002719EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E4C50F224EAFFC2002719EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				3E738ABC24EDBE5600658537 /* AssignmentsView.swift */,
 				3E738ABE24EDCCC500658537 /* AssignmentRow.swift */,
 				3E5BB2F024EEEB0F0051C21C /* EditAssignmentView.swift */,
+				3E14B00124F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift */,
 			);
 			path = Assignments;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E14B00224F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift in Sources */,
 				3E4C512124EB3243002719EA /* CourseRowViewModel.swift in Sources */,
 				3ED58DD424ECF1CA0044168A /* TextView.swift in Sources */,
 				3E5BB2F124EEEB0F0051C21C /* EditAssignmentView.swift in Sources */,

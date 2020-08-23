@@ -27,7 +27,7 @@ struct CourseWorkGlanceView: View {
                     Spacer()
                 }
                 
-                HorizontalGlanceView(title: "Critical priority assignments", complete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["complete"]!.count, incomplete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["incomplete"]!.count, imageName: Images.person, color: .red)
+                HorizontalGlanceView(title: "Critical priority assignments", complete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["complete"]!.count, incomplete: viewModel.fetchCriticalPriorityAssignmentsData(for: course, data: assignments)["incomplete"]!.count, imageName: Images.exclamationmarkWithCircle, color: .red)
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)

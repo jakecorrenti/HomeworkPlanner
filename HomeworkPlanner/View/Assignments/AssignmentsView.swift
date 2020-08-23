@@ -15,6 +15,7 @@ struct AssignmentsView: View {
     let viewModel = AssignmentsViewModel()
     
     @State private var assignmentsCompletionState = 0
+    @State private var showNewAssignment = false
     
     var body: some View {
         NavigationView {
@@ -40,15 +41,23 @@ struct AssignmentsView: View {
                     }
                     .onDelete(perform: delete)
                 }
+                .sheet(isPresented: $showNewAssignment, content: {
+                    NewAssignmentViewSpecifyingCourse()
+                        .environment(\.managedObjectContext, self.moc)
+                })
                 .navigationBarTitle("Assignments")
-                .navigationBarTitle("Assignments")
+                .navigationBarItems(trailing: Button(action: {
+                    self.showNewAssignment.toggle()
+                }, label: {
+                    Image(systemName: Images.plus)
+                }))
             }
         }
     }
     
     func delete(indexSet: IndexSet) {
         for index in indexSet {
-            self.viewModel.deleteAssignment(assignment: self.assignments[index], context: self.moc)
+            self.viewModel.deleteAssignment(assignment: self.viewModel.filterAssignments(state: self.assignmentsCompletionState, data: self.assignments)[index], context: self.moc)
         }
     }
 }
