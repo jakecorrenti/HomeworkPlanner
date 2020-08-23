@@ -38,7 +38,7 @@ struct CourseDetailViewModel {
                 completedAssignments.append(assignment)
             }
         }
-        return completedAssignments
+        return completedAssignments.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
     }
     
     func fetchIncompleteAssignments(for course: Course, data: FetchedResults<Assignment>) -> [Assignment] {
@@ -50,7 +50,7 @@ struct CourseDetailViewModel {
                 incompleteAssignments.append(assignment)
             }
         }
-        return incompleteAssignments
+        return incompleteAssignments.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
     }
     
     func fetchOverdueAssignments(for course: Course, data: FetchedResults<Assignment>) -> [Assignment] {
@@ -60,7 +60,8 @@ struct CourseDetailViewModel {
         for assignment in incompleteAssignments where assignment.dueDate! < Date() {
             overDueAssignments.append(assignment)
         }
-        return overDueAssignments
+        let chronological = overDueAssignments.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date()}
+        return chronological.filter { !$0.isComplete } + chronological.filter { $0.isComplete }
     }
     
     /// Assignments key gives list of all assignments, complete key gives list of completed assignments, incomplete key gives list of incomplete assignments
@@ -73,10 +74,12 @@ struct CourseDetailViewModel {
         let complete = dueToday.filter { $0.isComplete }
         let incomplete = dueToday.filter { !$0.isComplete }
         
+        let chronological = dueToday.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
+        
         return [
-            "assignments" : dueToday,
-            "complete" : complete,
-            "incomplete" : incomplete
+            "assignments" : chronological.filter { !$0.isComplete } + chronological.filter { $0.isComplete },
+            "complete" : complete.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() },
+            "incomplete" : incomplete.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
         ]
     }
     
@@ -84,13 +87,15 @@ struct CourseDetailViewModel {
     func fetchCriticalPriorityAssignmentsData(for course: Course, data: FetchedResults<Assignment>) -> [String : [Assignment]] {
         let assignments = fetchAssignmentsFor(course: course, data: data)
         let criticalPriority = assignments.filter { $0.priority == 4 }
-        let completed = criticalPriority.filter { $0.isComplete }
+        let complete = criticalPriority.filter { $0.isComplete }
         let incomplete = criticalPriority.filter { !$0.isComplete }
         
+        let chronological = criticalPriority.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
+        
         return [
-            "assignments" : criticalPriority,
-            "complete" : completed,
-            "incomplete" : incomplete
+            "assignments" : chronological.filter { !$0.isComplete } + chronological.filter { $0.isComplete },
+            "complete" : complete.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() },
+            "incomplete" : incomplete.sorted { $0.dueDate ?? Date() < $1.dueDate ?? Date() }
         ]
     }
     
