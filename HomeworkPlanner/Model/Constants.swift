@@ -29,6 +29,9 @@ enum Images {
     static let bellSlashed = "bell.slash"
     static let horizontalSlider = "slider.horizontal.3"
     static let exclamationmarkWithCircle = "exclamationmark.circle"
+    static let percent = "percent"
+    static let personalIcon = "personal-icon"
+    static let gear = "gear"
 }
 
 enum CourseType: String, CaseIterable {

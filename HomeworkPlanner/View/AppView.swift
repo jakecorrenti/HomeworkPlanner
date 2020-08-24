@@ -22,6 +22,12 @@ struct AppView: View {
                     Text("Courses")
                     Image(systemName: Images.book)
             }
+            
+            SettingsView()
+                .tabItem {
+                    Text("Settings")
+                    Image(systemName: Images.gear)
+            }
         }
     }
 }
