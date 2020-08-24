@@ -10,27 +10,28 @@ import SwiftUI
 
 struct AssignmentScoreView: View {
     let viewModel = AssignmentDetailViewModel()
-    let score = 87.00
+    @ObservedObject var assignment: Assignment
+    
     var body: some View {
         VStack {
             Text("Score:")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Text(self.viewModel.determineScoreMessage(score: self.score))
+            Text(self.viewModel.determineScoreMessage(score: self.assignment.score))
                 .font(.headline)
                 .fontWeight(.semibold)
                 .padding(.top, 8)
-                .foregroundColor(self.viewModel.determineScoreColor(score: self.score))
-            Text(String(format: "%.2f", self.score) + "%")
+                .foregroundColor(self.viewModel.determineScoreColor(score: self.assignment.score))
+            Text(String(format: "%.2f", self.assignment.score) + "%")
                 .font(.title)
                 .bold()
-                .foregroundColor(self.viewModel.determineScoreColor(score: self.score))
+                .foregroundColor(self.viewModel.determineScoreColor(score: self.assignment.score))
         }
     }
 }
 
 struct CourseScoreView_Previews: PreviewProvider {
     static var previews: some View {
-        AssignmentScoreView()
+        AssignmentScoreView(assignment: Assignment())
     }
 }

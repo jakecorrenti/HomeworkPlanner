@@ -13,6 +13,7 @@ struct AssignmentDetailView: View {
     @ObservedObject var assignment: Assignment
     @State private var showCourseDetail = false
     @State private var showEdit = false
+    @State private var showAddScore = false
     
     let viewModel = AssignmentDetailViewModel()
     
@@ -85,8 +86,12 @@ struct AssignmentDetailView: View {
                     .padding(.horizontal)
                 }
                 
-                AssignmentScoreView()
+                AssignmentScoreView(assignment: self.assignment)
                     .padding(.horizontal)
+                    .sheet(isPresented: $showAddScore) {
+                        AddAssignmentScoreView(assignment: self.assignment)
+                            .environment(\.managedObjectContext, self.moc)
+                }
             }
             
             HStack {
@@ -104,7 +109,7 @@ struct AssignmentDetailView: View {
             .navigationBarTitle(Text(self.assignment.name ?? "Unkown assignment"), displayMode: .large)
             .navigationBarItems(trailing: HStack(spacing: 16) {
                 Button(action: {
-                    
+                    self.showAddScore.toggle()
                 }, label: {
                     Image(systemName: Images.percent)
                 })
