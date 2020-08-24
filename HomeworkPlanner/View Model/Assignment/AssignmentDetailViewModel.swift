@@ -28,4 +28,30 @@ struct AssignmentDetailViewModel {
         
         return formatter.string(from: assignment.dueDate ?? Date())
     }
+    
+    func determineScoreMessage(score: Double) -> String {
+        if (70...79).contains(score) {
+            return "NICE!"
+        } else if (80...89).contains(score) {
+            return "GREAT!"
+        } else if (90...99).contains(score) {
+            return "AWESOME!"
+        } else if score >= 100 {
+            return "PERFECT!"
+        } else {
+            return ""
+        }
+    }
+    
+    func determineScoreColor(score: Double) -> Color {
+        if (0...49).contains(score) {
+            return .red
+        } else if (50...59).contains(score) {
+            return .orange
+        } else if (60...79).contains(score) {
+            return .yellow
+        } else {
+            return .green
+        }
+    }
 }

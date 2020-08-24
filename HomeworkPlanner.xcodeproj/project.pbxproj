@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E06BB9324F3186B00CF4E0B /* AssignmentScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06BB9224F3186B00CF4E0B /* AssignmentScoreView.swift */; };
 		3E12505724ECEF2700907C27 /* NewAssignmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E12505624ECEF2700907C27 /* NewAssignmentView.swift */; };
 		3E14B00224F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14B00124F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift */; };
 		3E4C50F124EAFFC2002719EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C50F024EAFFC2002719EA /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E06BB9224F3186B00CF4E0B /* AssignmentScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentScoreView.swift; sourceTree = "<group>"; };
 		3E12505624ECEF2700907C27 /* NewAssignmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAssignmentView.swift; sourceTree = "<group>"; };
 		3E14B00124F1941000FEB486 /* NewAssignmentViewSpecifyingCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAssignmentViewSpecifyingCourse.swift; sourceTree = "<group>"; };
 		3E4C50ED24EAFFC2002719EA /* HomeworkPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeworkPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				3EFC06F524EB8CE700E6CC6B /* CourseWorkGlanceView.swift */,
 				3E74583324ECD0B4008F5F0F /* EditCourseView.swift */,
 				3E95E4F524EC46C500B14AE9 /* AllCourseAssignmentsView.swift */,
+				3E06BB9224F3186B00CF4E0B /* AssignmentScoreView.swift */,
 			);
 			path = "Course Detail";
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				3E5BB2F124EEEB0F0051C21C /* EditAssignmentView.swift in Sources */,
 				3E738ABD24EDBE5600658537 /* AssignmentsView.swift in Sources */,
 				3EFC06F424EB8A0A00E6CC6B /* CourseDetailFrequencyView.swift in Sources */,
+				3E06BB9324F3186B00CF4E0B /* AssignmentScoreView.swift in Sources */,
 				3E95E4F624EC46C600B14AE9 /* AllCourseAssignmentsView.swift in Sources */,
 				3E4C50F124EAFFC2002719EA /* AppDelegate.swift in Sources */,
 				3E5BB2F324EF09C00051C21C /* EditAssignmentViewModel.swift in Sources */,

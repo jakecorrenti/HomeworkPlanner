@@ -37,50 +37,57 @@ struct AssignmentDetailView: View {
             }
             .padding(.horizontal)
             
-            ImageWithLabelView(image: Image(systemName: Images.clock), label: self.viewModel.convertDate(assignment: self.assignment), hasSpacer: true, font: .subheadline)
-                .padding([.horizontal, .top])
             HStack {
-                if self.assignment.reminderTiming > 0 {
-                    Image(systemName: Images.bell)
-                        .foregroundColor(self.viewModel.hasAlreadyBeenNotified(assignment: self.assignment) ? .green : .primary)
-                } else {
-                    Image(systemName: Images.bellSlashed)
+                VStack {
+                    ImageWithLabelView(image: Image(systemName: Images.clock), label: self.viewModel.convertDate(assignment: self.assignment), hasSpacer: true, font: .subheadline)
+                        .padding([.horizontal, .top])
+                    HStack {
+                        if self.assignment.reminderTiming > 0 {
+                            Image(systemName: Images.bell)
+                                .foregroundColor(self.viewModel.hasAlreadyBeenNotified(assignment: self.assignment) ? .green : .primary)
+                        } else {
+                            Image(systemName: Images.bellSlashed)
+                        }
+                        
+                        Text(AssignmentReminderTiming.allCases[Int(self.assignment.reminderTiming)].rawValue)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .font(.subheadline)
+                    .padding(.horizontal)
+                    ImageWithLabelView(image: Image(systemName: Images.filledFlag), label: PriorityStates.allCases[Int(self.assignment.priority)].rawValue, hasSpacer: true, font: .subheadline)
+                        .padding(.horizontal)
+                        .foregroundColor(priorityColors[Int(self.assignment.priority)])
+                    HStack {
+                        Image(systemName: Images.book)
+                        Button(action: {
+                            self.showCourseDetail.toggle()
+                        }) {
+                            Text(self.assignment.course?.name ?? "Uknown course")
+                        }
+                        Spacer()
+                    }
+                    .font(.subheadline)
+                    .padding(.horizontal)
+                    
+                    HStack {
+                        Image(systemName: self.assignment.isComplete ? Images.checkboxFilled : Images.square)
+                            .foregroundColor(self.assignment.isComplete ? .green : .primary)
+                        Button(action: {
+                            self.viewModel.changeCompletionStatus(assignment: self.assignment, context: self.moc)
+                        }) {
+                            Text(self.assignment.isComplete ? "Complete" : "Incomplete")
+                                .foregroundColor(self.assignment.isComplete ? .green : .red)
+                        }
+                        Spacer()
+                    }
+                    .font(.subheadline)
+                    .padding(.horizontal)
                 }
                 
-                Text(AssignmentReminderTiming.allCases[Int(self.assignment.reminderTiming)].rawValue)
-                    .foregroundColor(.secondary)
-                Spacer()
+                AssignmentScoreView()
+                    .padding(.horizontal)
             }
-            .font(.subheadline)
-            .padding(.horizontal)
-            ImageWithLabelView(image: Image(systemName: Images.filledFlag), label: PriorityStates.allCases[Int(self.assignment.priority)].rawValue, hasSpacer: true, font: .subheadline)
-                .padding(.horizontal)
-                .foregroundColor(priorityColors[Int(self.assignment.priority)])
-            HStack {
-                Image(systemName: Images.book)
-                Button(action: {
-                    self.showCourseDetail.toggle()
-                }) {
-                    Text(self.assignment.course?.name ?? "Uknown course")
-                }
-                Spacer()
-            }
-            .font(.subheadline)
-            .padding(.horizontal)
-            
-            HStack {
-                Image(systemName: self.assignment.isComplete ? Images.checkboxFilled : Images.square)
-                    .foregroundColor(self.assignment.isComplete ? .green : .primary)
-                Button(action: {
-                    self.viewModel.changeCompletionStatus(assignment: self.assignment, context: self.moc)
-                }) {
-                    Text(self.assignment.isComplete ? "Complete" : "Incomplete")
-                        .foregroundColor(self.assignment.isComplete ? .green : .red)
-                }
-                Spacer()
-            }
-            .font(.subheadline)
-            .padding(.horizontal)
             
             HStack {
                 Text(self.assignment.details ?? "Unknown assignment details")
@@ -95,15 +102,23 @@ struct AssignmentDetailView: View {
             }
         })
             .navigationBarTitle(Text(self.assignment.name ?? "Unkown assignment"), displayMode: .large)
-            .navigationBarItems(trailing: Button(action: {
-                self.showEdit.toggle()
-            }, label: {
-                Text("Edit")
-            })
-                .sheet(isPresented: $showEdit, content: {
-                    EditAssignmentView(assignment: self.assignment)
-                        .environment(\.managedObjectContext, self.moc)
+            .navigationBarItems(trailing: HStack(spacing: 16) {
+                Button(action: {
+                    
+                }, label: {
+                    Image(systemName: Images.percent)
                 })
+                
+                Button(action: {
+                    self.showEdit.toggle()
+                }, label: {
+                    Text("Edit")
+                })
+                    .sheet(isPresented: $showEdit, content: {
+                        EditAssignmentView(assignment: self.assignment)
+                            .environment(\.managedObjectContext, self.moc)
+                    })
+                }
         )
     }
 }
